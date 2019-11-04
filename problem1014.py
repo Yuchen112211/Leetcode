@@ -34,6 +34,8 @@ represents the max scores that can be achieved at current i.
 Score is computed as A[i] + A[k] + i - k where i < k, in such case, bigger the i+A[i] would
 give us the bigger score, and we simply compute the current score by add the prev and current
 A[k], then minus the k.
+
+Simple Dynamic programming.
 '''
 
 class Solution:

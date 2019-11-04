@@ -1,53 +1,60 @@
-class Solution(object):
-	def baseNeg2(self, N):
-		"""
-		:type N: int
-		:rtype: str
-		"""
-		from collections import deque
+'''
 
-		def add_in(d,i):
-			if i % 2 == 1:
-				if i + 1 in d:
-					d.remove(i+1)
-					add_in(d, i+2)
-				else:
-					d.add(i+1)
-			if i in d:
-				d.remove(i)
-				add_in(d, i+1)
-			else:
-				d.add(i)
-				
-		if N == 0:
-			return "0"
-		number = N
-		digit = deque([])
-		
-		
+1017. Convert to Base -2
+Medium
 
-		while number != 0:
-			index = 0
-			while pow(2,index) <= number:
-				index += 1
-			if index > 0:
-				index -= 1
-			digit.append(index)
-			number = number % pow(2, index)
-		rst = set([])
+Given a number N, return a string consisting of "0"s and "1"s that represents its value in base -2 (negative two).
 
-		for i in digit:
-			add_in(rst,i)
+The returned string must have no leading zeroes, unless the string is "0".
 
-		print rst
+ 
 
-		res = ""
-		for i in range(max(rst),-1,-1):
-			if i in rst:
-				res += "1"
-			else:
-				res += "0"
-		return res
+Example 1:
+
+Input: 2
+Output: "110"
+Explantion: (-2) ^ 2 + (-2) ^ 1 = 2
+
+Example 2:
+
+Input: 3
+Output: "111"
+Explantion: (-2) ^ 2 + (-2) ^ 1 + (-2) ^ 0 = 3
+
+Example 3:
+
+Input: 4
+Output: "100"
+Explantion: (-2) ^ 2 = 4
+
+ 
+
+Note:
+
+    0 <= N <= 10^9
+
+
+Solution:
+Actually I do not get this completely.
+Mark this as unsolved.
+
+'''
+
+
+class Solution:
+    def baseNeg2(self, N):
+        if not N:
+            return "0"
+        ret = []
+        while N:
+            r = N % (-2)
+            N //= (-2)
+            if r < 0:
+                r = 2 + r
+                N += 1
+            ret.append(str(r))
+        ret.reverse()
+        return "".join(ret)
 
 if __name__ == '__main__':
 	s = Solution()
