@@ -32,9 +32,17 @@ Note:
     -2^31 <= answer <= 2^31 - 1  (The answer is guaranteed to fit within a 32-bit integer.)
 
 
+Solution:
+After observing the examples, I noticed that every four numbers can form a group.
+Each group is connected with the minus operator.
 
+So if input is 5, which is (5 * 4 / 3 + 2) - (1)
+When computing, split every 4 numbers in one group, and compute them.
 
+With the helper Method compute, we can ignore how many numbers are in each group, which can
+let us ignore the last group with less than 4 numbers.
 
+Can be optimized. Stacks? Still going as four operators.
 
 '''
 
@@ -55,15 +63,20 @@ class Solution(object):
 		return tmp
 
 	def clumsy(self, N):
+
 		length = N
 		nums = ([N-i for i in range(length)])
 		groups = length/4+1
 		nums_compute = []
+
 		for i in range(groups):
 			nums_compute.append(nums[i*4:(i+1)*4])
+
 		if [] in nums_compute:
 			nums_compute.remove([])
+
 		rst = self.compute(nums_compute[0],0)
+		#Can be optimized
 		if len(nums_compute) == 1:
 			return rst
 		else:
