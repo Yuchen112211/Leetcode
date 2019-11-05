@@ -1,3 +1,32 @@
+'''
+
+112. Path Sum
+Easy
+
+Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+
+Note: A leaf is a node with no children.
+
+Example:
+
+Given the below binary tree and sum = 22,
+
+      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1
+
+return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+
+Solution:
+Simple traversal. Add the number into the list passed through function when encoutner
+Leaf node.	
+
+'''
+
 class TreeNode(object):
 	def __init__(self, x):
 		self.val = x
@@ -6,47 +35,13 @@ class TreeNode(object):
 
 class Solution(object):
 	def hasPathSum(self, root, sum):
-		"""
-		
-		if root is None:
-			return 0
-		if root.left is None and root.right is None:
-			if sum == root.val:
-				return True
-			return False
-		def getPossibleSum(root):
-			if root is None:
-				return []
-			if root.left is None and root.right is None:
-				return [root.val]
-			left_sum = []
-			right_sum = []
-			current_sum = []
-			if root.left is not None:
-				left_sum = getPossibleSum(root.left)
-				if left_sum is not []:
-					current_sum += [i+root.val for i in left_sum]
-				else:
-					current_sum += [root.val]
-			if right_sum is not None:
-				right_sum = getPossibleSum(root.right)
-				if right_sum is not []:
-					current_sum += [i+root.val for i in right_sum]
-				else:
-					current_sum += [root.val]
-			return list(set(current_sum))
-		sums = getPossibleSum(root)
-		if sum in sums:
-			return True
-		return False
-		"""
-		sum_l = []
+		sum_l = set()
 		def getPossibleSum(root,current_sum,sum_l):
 			if root is None:
-				sum_l.append(current_sum)
+				sum_l.add(current_sum)
 				return
 			if root.left is None and root.right is None:
-				sum_l.append(current_sum+root.val)
+				sum_l.add(current_sum+root.val)
 				return
 			if root.left is not None:
 				getPossibleSum(root.left,current_sum+root.val,sum_l)
