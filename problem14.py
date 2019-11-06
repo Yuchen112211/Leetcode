@@ -1,3 +1,7 @@
+
+'''
+Pretty ez, gonna skip.
+'''
 class Solution(object):
     def longestCommonPrefix(self, strs):
         """

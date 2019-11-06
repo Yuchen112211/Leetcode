@@ -1,10 +1,3 @@
-# Definition for a binary tree node.
-# class TreeNode(object):
-#	 def __init__(self, x):
-#		 self.val = x
-#		 self.left = None
-#		 self.right = None
-
 class TreeNode(object):
 	def __init__(self, x):
 		self.val = x
@@ -12,36 +5,54 @@ class TreeNode(object):
 		self.right = None
 
 class TreePath(TreeNode):
-		def __init__(self,l,val,root):
-			self.path = l
-			self.sum = val
-			self.node = root
+	def __init__(self,l,val,root):
+		self.path = l
+		self.sum = val
+		self.node = root
+
+'''
+
+113. Path Sum II
+Medium
+
+Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+
+Note: A leaf is a node with no children.
+
+Example:
+
+Given the below binary tree and sum = 22,
+
+      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \    / \
+7    2  5   1
+
+Return:
+
+[
+   [5,4,11,2],
+   [5,8,4,5]
+]
+
+Solution:
+This is actually a backtrack solution.
+When traversal, we append the current value to the list which records the path that go all way from root to leaf.
+After we finished recursion of current node, and then we simply pop out the tail element of the recorded list in
+order to conduct next tree's traversal.
+
+Since we append the current val, then we call recursive of the same function, after we go through all the children
+we then pop out the tail element.
+
+That's it, backtrack.
+
+'''
+
 class Solution(object):
-	"""
-	def pathSum(self, root, sum):
-		if not root:
-			return []
-		paths = {root:[root.val]}
-		rst = []
-		self.findSum(root,paths,rst,sum)
-		return rst
 
-	def findSum(self, root, paths,rst,sum1):
-		import copy
-		if root.left is not None:
-			paths[root.left] = copy.deepcopy(paths[root])
-			paths[root.left].append(root.left.val)
-			self.findSum(root.left, paths,rst,sum1)
-		if root.right is not None:
-			paths[root.right] = copy.deepcopy(paths[root])
-			paths[root.right].append(root.right.val)
-			self.findSum(root.right, paths,rst,sum1)
-
-		if not root.left and not root.right:
-			if sum(paths[root]) == sum1:
-				rst.append(paths[root])
-	"""
-	
     def pathSum(self, root, summ):
         a = []
         b = []

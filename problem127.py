@@ -1,59 +1,80 @@
+'''
+
+127. Word Ladder
+Medium
+
+Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
+
+    Only one letter can be changed at a time.
+    Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
+
+Note:
+
+    Return 0 if there is no such transformation sequence.
+    All words have the same length.
+    All words contain only lowercase alphabetic characters.
+    You may assume no duplicates in the word list.
+    You may assume beginWord and endWord are non-empty and are not the same.
+
+Example 1:
+
+Input:
+beginWord = "hit",
+endWord = "cog",
+wordList = ["hot","dot","dog","lot","log","cog"]
+
+Output: 5
+
+Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+return its length 5.
+
+Example 2:
+
+Input:
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot","dot","dog","lot","log"]
+
+Output: 0
+
+Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
+
+Solution:
+
+This is actually a very smart one.
+We first form a dict, record each string as the forms with slashes.
+For examples, ABC would become _BC,A_C,AB_, these as keys, and ABC as value.
+
+Then we form the stack, first form the beginword into a tuple, where the second
+value is one, means the distance.
+
+Pop out what is in stack, if word is not used, then we find all its neighbors by the
+procedures like before, we can find every string that follow this pattern.
+If there's any word like this pattern did not appear before, add the distance by 1 and
+push it back into the stack.
+
+The element that popped out from the stack, we need to check whether it's the endword,
+if so, return its distance, if not, continue the process
+'''
+
 class Solution(object):
 	def ladderLength(self, beginWord, endWord, wordList):
-		def distance(word1,word2):
-			dis = 0
-			for i in range(len(word1)):
-				if word1[i] != word2[i]:
-					dis += 1
-			return dis == 1
-
-		def getAllDistance(matrix,start):
-			g = matrix
-			visited = [0 for i in g]
-			visited[start] = 1
-			distances = [len(g)*2 for i in g]
-			distances[start] = 0
-			stack = [start]
-			while stack:
-				if 0 not in visited:
-					break
-				index_now = stack.pop()
-				visited[index_now] = 1
-				path_now = g[index_now]
-				next_distance = distances[index_now] + 1
-				for i in range(len(path_now)):
-					if path_now[i] == 1 and (visited[i] == 0 or distances[i] > next_distance):
-						distances[i] = min(distances[i],next_distance)
-						stack.append(i)
-				if len(stack) == 0 and 0 in visited:
-					stack.append(visited.index(0))
-					visited[visited.index(0)] = 1
-			return distances
-
-		if endWord not in wordList or len(wordList) == 0:
-			return 0
-
-		if beginWord in wordList:
-			wordList.remove(beginWord)
-			wordList.append(beginWord)
-		else:
-			wordList.append(beginWord)
-
-		all_words = wordList
-		matrix = [[0 for i in all_words] for k in all_words]
-		for i in range(len(wordList)-1):
-			for k in range(i,len(wordList)):
-				if distance(wordList[i],wordList[k]):
-					matrix[i][k] = 1
-					matrix[k][i] = 1
-		steps = getAllDistance(matrix,len(matrix)-1)
-		for i in range(len(wordList)):
-			if wordList[i] == endWord:
-				tmp = steps[i] + 1
-				if tmp > len(matrix):
-					return 0
-				else:
-					return tmp
+		adj = collections.defaultdict(list)
+		for word in wordList:
+			for i in range(len(word)):
+				adj[word[:i] + '_' + word[i+1:]].append(word)
+		visited = set()
+		q = collections.deque([(beginWord, 1)])
+		while q:
+			word, k = q.popleft()
+			if word == endWord:
+				return k
+			if word not in visited:
+				visited.add(word)
+				for i in range(len(word)):
+					neighbors = word[:i] + '_' + word[i+1:]
+					for neighbor in adj[neighbors]:
+						q.append((neighbor, k+1))
 		return 0
 
 if __name__ == '__main__':

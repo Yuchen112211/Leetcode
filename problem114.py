@@ -1,3 +1,40 @@
+'''
+
+114. Flatten Binary Tree to Linked List
+Medium
+
+Given a binary tree, flatten it to a linked list in-place.
+
+For example, given the following tree:
+
+    1
+   / \
+  2   5
+ / \   \
+3   4   6
+
+The flattened tree should look like:
+
+1
+ \
+  2
+   \
+    3
+     \
+      4
+       \
+        5
+         \
+          6
+
+Solution:
+This is the inorder traversal, first the root, then left, then right.
+Use a list to maintain such order, initialize the list with one element [root].
+For every node, append the right node first, then append the left, and then pop
+out the last element of the list, repeat this approach.
+This should generate out the designated form.
+
+'''
 # Definition for a binary tree node.
 class TreeNode(object):
 	def __init__(self, x):

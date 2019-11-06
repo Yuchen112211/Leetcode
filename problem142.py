@@ -1,3 +1,10 @@
+'''
+142. Linked List Cycle II
+
+Solution:
+Use a dictionary(hashmap) to store every node that appears. Once find a node that
+appeared before, return the node.
+'''
 class ListNode(object):
     def __init__(self,x):
         self.val = x

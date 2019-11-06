@@ -25,6 +25,8 @@ Solution:
 Simple traversal. Add the number into the list passed through function when encoutner
 Leaf node.	
 
+Use set rather than list would provide less time complexity.
+
 '''
 
 class TreeNode(object):

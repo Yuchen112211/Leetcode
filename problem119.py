@@ -1,3 +1,6 @@
+'''
+Pretty easy, won't write description.
+'''
 class Solution(object):
 	def getRow(self, rowIndex):
 		"""
