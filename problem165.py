@@ -1,3 +1,6 @@
+'''
+Very easy, gonna skip.
+'''
 class Solution(object):
 	def compareVersion(self, version1, version2):
 		"""

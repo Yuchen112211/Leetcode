@@ -1,3 +1,29 @@
+'''
+179. Largest Number
+Medium
+
+Given a list of non negative integers, arrange them such that they form the largest number.
+
+Example 1:
+
+Input: [10,2]
+Output: "210"
+
+Example 2:
+
+Input: [3,30,34,5,9]
+Output: "9534330"
+
+Solution:
+Transform every data into String format, then sort it, which would make the list form the biggest number.
+
+Write a lambda function to perform such sort.
+if x+y < y+x we determine that x would become less than x would become the previous one.
+
+Would need functools.cmp_to_key
+Just memorize this.
+'''
+
 class Solution(object):
     def largestNumber(self, nums):
         """

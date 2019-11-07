@@ -1,24 +1,51 @@
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+'''
 
-def removeNthFromEnd(head, n):
-	tmp_list = []
-	while head is not None:
-		tmp_list.append(head)
-		head = head.next
-	tmp_list = tmp_list[:len(tmp_list)-n]+tmp_list[len(tmp_list)-n+1:]
-	if tmp_list == []:
-		return None
-	if len(tmp_list) == 1:
-		tmp_list[0].next = None
-		return tmp_list[0]
-	head = tmp_list[0]
-	for i in range(len(tmp_list)-1):
-		tmp_list[i].next = tmp_list[i+1]
-		tmp_list[i+1].next = None
-	return head
+19. Remove Nth Node From End of List
+Medium
+
+Given a linked list, remove the n-th node from the end of list and return its head.
+
+Example:
+
+Given linked list: 1->2->3->4->5, and n = 2.
+
+After removing the second node from the end, the linked list becomes 1->2->3->5.
+
+Solution:
+Use two pointers with one pass.
+The second pointer goes N steps ahead of the first pointer. When the second is None, we encounter
+the node that we need to remove.
+Notice, I use second.next to determine whether we have encountered the designated node. Because we have
+to assign the remove node's next to be the next node of the previous node.
+
+'''
+class ListNode(object):
+	def __init__(self, x):
+		self.val = x
+		self.next = None
+
+class Solution(object):
+	def removeNthFromEnd(self, head, n):
+		"""
+		:type head: ListNode
+		:type n: int
+		:rtype: ListNode
+		"""
+		
+		first = head
+		second = head
+		num = n
+		while num > 0:
+			second = second.next
+			num -= 1
+		if not second:
+			return head.next
+		
+		while second.next:
+			second = second.next
+			first = first.next
+		first.next = first.next.next
+		return head
 
 if __name__ == '__main__':
 	head = ListNode(1)
