@@ -1,5 +1,31 @@
+'''
+23. Merge k Sorted Lists
+Hard
+
+Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
+Example:
+
+Input:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+Output: 1->1->2->3->4->4->5->6
+
+Solution:
+The trick here is divide and conqure.
+Since we can not increase the merge of two linked list, we can observe the task and divide them
+into subtask.
+The deduction here is T(n) = 2T(n/2) + O(n)
+
+T(n/2) means we first merge half of the lists with the same function, we do them twice, then we'll
+have 2 linked lists, we merge them together, problem solved.
+
+'''
+
 class ListNode(object):
-    """docstring for ClassName"""
     def __init__(self,val):
         self.val = val
         self.next = None
@@ -7,6 +33,14 @@ class ListNode(object):
 class Solution(object):
     def mergeNodes(self, Node1, Node2):
         rst = None
+        
+        if not Node1 and not Node2:
+            return None
+        elif not Node1:
+            return Node2
+        elif not Node2:
+            return Node1
+
         if Node1.val < Node2.val:
             rst = ListNode(Node1.val)
             Node1 = Node1.next
@@ -31,19 +65,19 @@ class Solution(object):
             prev.next = Node2
         return rst
 
-    def mergeKLists(self, lists):
-        lists_now = []
-        for i in range(len(lists)/2):
-            tmp = self.mergeNodes(lists[2*i],lists[2*i+1])
-            lists_now.append(tmp)
-        if len(lists) % 2 == 1:
-            lists_now.append(lists[-1])
+    def mergeKLists(self, lists):  
+        if len(lists) == 0:
+            return None
+        if len(lists) == 1:
+            return lists[0]
+        if len(lists) == 2:
+            return self.mergeNodes(lists[0],lists[1])
 
-        if len(lists_now) == 1:
-            return lists_now
         else:
-            return self.mergeKLists(lists_now)
-        
+            left = self.mergeKLists(lists[:len(lists)/2])
+            right = self.mergeKLists(lists[len(lists)/2:])
+            return self.mergeNodes(left, right)
+
 
 if __name__ == "__main__":
     node1 = ListNode(1)
@@ -58,7 +92,7 @@ if __name__ == "__main__":
     node3.next = ListNode(3)
     node3.next.next = ListNode(4)
 
-    rst = Solution().mergeKLists([node1,node2,node3])[0]
+    rst = Solution().mergeKLists([node1,node2,node3])
 
     while rst:
         print rst.val
