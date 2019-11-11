@@ -1,3 +1,7 @@
+'''
+Easy Solution.
+'''
+
 class Solution(object):
 	def getHint(self, secret, guess):
 		"""
