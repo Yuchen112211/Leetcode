@@ -8,9 +8,12 @@ nothing[i] = maxProfit of prices[:i+1] with the action nothing at day i.
 
 The base cases are buy[0] = -prices[0], sell[0] = nothing[0] = 0.
 The recursive relationships are
-buy[i] = max(nothing[i-1] - prices[i], buy[i-1]) # if buy at day i then the action at day i-1 must be nothing
+buy[i] = max(nothing[i-1] - prices[i], buy[i-1])
+# if buy at day i then the action at day i-1 must be nothing
+
 sell[i] = max(buy[i-1]+prices[i], sell[i-1])
 nothing[i] = max(sell[i-1], buy[i-1], nothing[i-1]).
+
 '''
 # Insightful approach
     def maxProfit(self, prices):
