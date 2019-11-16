@@ -1,3 +1,8 @@
+'''
+
+This is a contest problem, don't recal the specific problem.
+
+'''
 class Solution(object):
 	def minimumAbsDifference(self, arr):
 		"""

@@ -22,6 +22,7 @@ coin value. If it is out of the boundary, simply set it to MAX.
 
 Very classic, explained on class, stupid if did not recall.
 
+Top-down solution.(Or is it?)
 '''
 
 class Solution(object):

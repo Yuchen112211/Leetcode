@@ -1,3 +1,12 @@
+'''
+
+Solution:
+This is a problem about the possibility. If the position is out of the board, return 0, if not,
+check if the K is 0.
+Remember we have to check if the current position is in the memo, if so, skip for the infinite recursion.
+Also remember to multiply 0.125, which is the possibility of each direction.
+
+'''
 class Solution(object):
 	def knightProbability(self, N, K, r, c):
 		memo={}
