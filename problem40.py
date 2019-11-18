@@ -9,8 +9,8 @@ Each number in candidates may only be used once in the combination.
 
 Note:
 
-    All numbers (including target) will be positive integers.
-    The solution set must not contain duplicate combinations.
+	All numbers (including target) will be positive integers.
+	The solution set must not contain duplicate combinations.
 
 Example 1:
 
@@ -37,6 +37,9 @@ Classic Backtrack. Maybe now it's too late. This is 1:12 AM on 11.17.
 I will rewrite this tomorrow.
 Should have done this by myself.
 
+Yep, this is 11:57AM on 11.17
+I rewrote this.
+Funny problem.
 '''
 
 class Solution(object):
@@ -56,3 +59,5 @@ class Solution(object):
 		res = []
 		comb(candidates,target,[],res,0)
 		return res
+
+

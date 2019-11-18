@@ -1,3 +1,60 @@
+'''
+
+785. Is Graph Bipartite?
+Medium
+
+Given an undirected graph, return true if and only if it is bipartite.
+
+Recall that a graph is bipartite if we can split it's set of nodes into two independent subsets A and B such that every edge in the graph has one node in A and another node in B.
+
+The graph is given in the following form: graph[i] is a list of indexes j for which the edge between nodes i and j exists.  Each node is an integer between 0 and graph.length - 1.  There are no self edges or parallel edges: graph[i] does not contain i, and it doesn't contain any element twice.
+
+Example 1:
+Input: [[1,3], [0,2], [1,3], [0,2]]
+Output: true
+Explanation: 
+The graph looks like this:
+0----1
+|    |
+|    |
+3----2
+We can divide the vertices into two groups: {0, 2} and {1, 3}.
+
+Example 2:
+Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
+Output: false
+Explanation: 
+The graph looks like this:
+0----1
+| \  |
+|  \ |
+3----2
+We cannot find a way to divide the set of nodes into two independent subsets.
+
+Solution:
+This problem is asking can we divide the given graph into two unions, in one union,
+no connections between any two of the node.
+
+Then we can go over the whole graph twice, use two colors to color all nodes, any pair
+of the nodes must have different colors. 
+
+First find the first node that is not solo, which means it has some nodes connected to it.
+Then set the node's color to be first color.
+
+Since there's color existed, we go over the graph. If an edge contains two nodes without color,
+conitnue. If one node has color, set the contrary. If two node are both colored, but the color
+were the same, that means the two connected nodes are in the same union, which should simply 
+return False.
+
+Since we jumped when we encountered the situation that both nodes are not colored, we have to go
+through the graph again to set the color.
+
+Repeat both procedures, so at the second round, first set an uncolored node to be colored, since it 
+is not colored before, then there's no node connected to this node, simply set the node to be true.
+
+Then go over the graph again. Repeat the validation.
+
+'''
 class Solution(object):
     def isBipartite(self, graph):
         """
@@ -23,6 +80,8 @@ class Solution(object):
         for i in range(len(graph)):
         	if set([node_color[k] for k in graph[i]]) == set([None]):
         		node_color[i] = True
+                break
+
         for i in range(len(graph)):
         	for k in graph[i]:
         		if node_color[i] is None:
