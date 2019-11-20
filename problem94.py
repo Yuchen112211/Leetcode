@@ -1,3 +1,25 @@
+'''
+
+94. Binary Tree Inorder Traversal
+Medium
+
+Given a binary tree, return the inorder traversal of its nodes' values.
+
+Example:
+
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [1,3,2]
+
+Solution:
+If I can not write this code with eyes closed, I should kill myself.
+
+'''
 #Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):

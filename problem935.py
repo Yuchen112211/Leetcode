@@ -1,3 +1,10 @@
+'''
+
+Actually a boring problem.
+Use recursive relationship to compute the whole count that the knight may come to specific
+Once the knight come to a digit, plus the current value to the next step.
+
+'''
 class Solution(object):
     def knightDialer(self, N):
         """

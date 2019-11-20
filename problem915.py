@@ -1,3 +1,41 @@
+'''
+
+915. Partition Array into Disjoint Intervals
+Medium
+
+Given an array A, partition it into two (contiguous) subarrays left and right so that:
+
+    Every element in left is less than or equal to every element in right.
+    left and right are non-empty.
+    left has the smallest possible size.
+
+Return the length of left after such a partitioning.  It is guaranteed that such a partitioning exists.
+
+ 
+
+Example 1:
+
+Input: [5,0,3,8,6]
+Output: 3
+Explanation: left = [5,0,3], right = [8,6]
+
+Example 2:
+
+Input: [1,1,1,0,6,12]
+Output: 4
+Explanation: left = [1,1,1,0], right = [6,12]
+
+ 
+Solution:
+Code below is relatively straight forward. There would definitely exist such partition, so when we iterate until
+the end of the array, we return the last index.
+
+For each index, find out if the current index is the partition, left_max is updated every time, right_min is using 
+min() function to find the min value, which I think is crap and stupid.
+
+However this solution beats 86% in time. Strange. Since the min() method takes up a great proportion of the time.
+
+'''
 class Solution(object):
 	def partitionDisjoint(self, A):
 		"""

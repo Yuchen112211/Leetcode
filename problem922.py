@@ -1,30 +1,37 @@
-class Solution(object):
-    def swap(self,A,index1,index2):
-        tmp = A[index1]
-        A[index1] = A[index2]
-        A[index2] = tmp
+'''
 
+922. Sort Array By Parity II
+Easy
+
+Given an array A of non-negative integers, half of the integers in A are odd, and half of the integers are even.
+
+Sort the array so that whenever A[i] is odd, i is odd; and whenever A[i] is even, i is even.
+
+You may return any answer array that satisfies this condition.
+
+ 
+
+Example 1:
+
+Input: [4,2,5,7]
+Output: [4,5,2,7]
+Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.
+
+Solution:
+Maintain another index for odd numbers, then use a for loop to go over the even numebrs.
+If ever encounter an odd number on an even index, start to increase the odd index, if 
+found an even number on the odd index, swap two numbers.
+
+'''
+
+class Solution(object):
     def sortArrayByParityII(self, A):
-        """
-        :type A: List[int]
-        :rtype: List[int]
-        """
-        index1 = 0
-        index2 = 1
-        while index2 < len(A):
-            if index1 % 2 == A[index1] % 2:
-                index1 += 1
-                index2 = index1+1
-            else:
-                if index2 % 2 ==  A[index2] % 2:
-                    index2 += 1
-                elif A[index2] % 2 != A[index1] % 2:
-                    self.swap(A,index1,index2)
-                    index1 = index2 + 1
-                    index2 = index1 + 1
-                else:
-                    index1 += 1
-                    index2 = index1 + 1
+        j = 1
+        for i in xrange(0, len(A), 2):
+            if A[i] % 2:
+                while A[j] % 2:
+                    j += 2
+                A[i], A[j] = A[j], A[i]
         return A
 if __name__ == '__main__':
     s = Solution()
