@@ -28,51 +28,56 @@ methods.
 
 '''
 
-class Solution(Object):
-    def searchRange(nums, target):
+class Solution(object):        
+    def searchRange(self,nums, target):
         """
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
         """
-        if len(nums) == 0:
+        def binarySearch(arr, num):
+            left = 0
+            right = len(arr) - 1
+            while left < right:
+                if right - left == 1:
+                    if arr[left] != num and arr[right] != num:
+                        return -1
+                    if arr[right] == num:
+                        return right
+                    if arr[left] == num:
+                        return left
+                mid = (left + right) / 2
+                if arr[mid] == num:
+                    return mid
+                elif arr[mid] < num:
+                    left = mid
+                elif arr[mid] > num:
+                    right = mid
+            return -1
+        if not nums:
             return [-1,-1]
-        elif len(nums) == 1:
-            if target == nums[0]:
+        if len(nums) == 1:
+            if nums[0] == target:
                 return [0,0]
             else:
                 return [-1,-1]
-        
-        left = 0
-        right = len(nums) - 1
-        signal = 0
-        while nums[(left+right)/2] != target:
-            if right - left <= 1:
-                if nums[right] == target:
-                    left = right
-                    break
-                else:
-                    signal = 1
-                    break
-            if nums[(left+right)/2] > target:
-                right = (left+right)/2
+            
+        mid = binarySearch(nums, target)
+        if mid == -1:
+            return [-1, -1]
+        left = mid
+        right = mid
+        while left >= 0:
+            if nums[left] == target:
+                left -= 1
             else:
-                left = (left+right)/2
-        if signal == 1:
-            return [-1,-1]
-        mid_index = (left+right) / 2
-        left,right = mid_index,mid_index
-        while nums[left] == target and left > 0:
-            left -= 1
-        while nums[right] == target and right < len(nums) - 1:
-            right += 1
-        left += 1
-        right -= 1
-        if nums[0] == target:
-            left = 0
-        if nums[-1] == target:
-            right = len(nums) - 1
-        return [left,right]
+                break
+        while right < len(nums):
+            if nums[right] == target:
+                right += 1
+            else:
+                break
+        return [left+1, right - 1]
 
 '''
 class Solution(object):        
@@ -94,4 +99,4 @@ class Solution(object):
 
 s = Solution()
 
-print s.searchRange([5,7,7,8,8,10])
+print s.searchRange([5,7,7,8,8,10], 10)
