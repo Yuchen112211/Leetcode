@@ -35,6 +35,10 @@ When the max heap's head in cnt is bigger than 0, which means the max value of w
 we use a while loop to pop out the max heap's head, the times of popping equals to the element count in cnt,
 which means how many the number has passed.
 
+Every time we pass an value, just add one to the corresbonding cnt. For every node whose value in cnt is not zero means that the node has been
+passed by the window, so use a for loop to pop out every node with positive value in cnt. This operation would behave like a recorder, record the 
+value's pass, also it is a max heap.
+
 Very elegent approach, very interesting.
 
 '''
@@ -63,7 +67,6 @@ class Solution(object):
 		heap = []
 		for i in range(k):
 			heapq.heappush(heap,-nums[i])
-		print heap
 		res = [-heap[0]]
 		for i in range(1,len(nums)-k+1):
 			heapq.heappush(heap,-nums[i+k-1])
