@@ -14,7 +14,8 @@ class Solution(object):
 			connected[0][i] = anotherGrid[0][i]
 		hits = hits[::-1]
 		for i,k in hits:
-# To be continued		
+			pass
+#To be continued
 
 s = Solution()
 grid = [[1,1,0,0],[1,1,1,1],[1,1,1,1]]
