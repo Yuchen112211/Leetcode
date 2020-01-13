@@ -57,7 +57,7 @@ class Solution(object):
         for l in xrange(2, n):
             for left in xrange(0, n - l):
                 right = left + l
-                dp[left][right] = float("Inf")
+                dp[left][right] = float("inf")
                 for k in xrange(left + 1, right):
                     dp[left][right] = min(dp[left][right], dp[left][k] + dp[k][right] + A[left]*A[right]*A[k])
         return dp[0][-1]

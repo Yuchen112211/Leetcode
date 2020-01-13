@@ -10,7 +10,6 @@ Additionally, the division that we use is floor division such that 10 * 9 / 8 eq
 
 Implement the clumsy function as defined above: given an integer N, it returns the clumsy factorial of N.
 
- 
 
 Example 1:
 

@@ -46,7 +46,9 @@ Explanation:
 4th day: 1, 1
 
 Solution:
-
+Use bipart to find the answer which should be in between the largest value and the smallest value.
+The largest partition value is the sum of all cargos, the smallest is the max alue of the cargo.
+Corresbondingly, the smallest partition number is 1, the biggest partition number is the number of the cargos.
 
 '''
 class Solution(object):
