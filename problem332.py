@@ -30,6 +30,12 @@ by dfs.
 
 Read the code again and carefully, we should get this.
 
+From 1/29/2020:
+Actually this is not so right about the solution.
+How the popleft works? Cause there is no redundent tickets in the collection, every ticket would
+definitely be used, and only used once. That's why when we perform a dfs, simply use popleft could
+give us a correct path to reconstruct the itinerary.
+
 '''
 '''
 class Solution(object):
